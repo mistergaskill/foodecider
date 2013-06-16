@@ -1,19 +1,36 @@
 function dataCtrl($scope) {
 	function User(name, votes) {
 		this.name = name;
-		this.votes = votes || [],
-		this.done = function () {
-			return this.votes.length === $scope.choices.length;
+		this.votes = votes || {};
+		this.isDone = function () {
+			return Object.keys(this.votes).length === $scope.choices.length;
 		};
 	}
 
 	function Choice(name) {
 		this.name = name;
-		this.score = 0;
+		this.getScores = function () {return 11;};
+		this.getScore = function () {
+			var _this = this;
+			return $scope.users.map(function (user) {
+				return user.votes[_this.name] || 0;
+			}).reduce(function (total, score) {
+				return total += score;
+			}, 0);
+		};
+	}
+
+	function isNameTaken (name, objects) {
+		return objects.map(function (object) {
+			return object.name;
+		}).indexOf(name) !== -1;
 	}
 
 	$scope.users = [
-		new User("jeff", [-1, 1]),
+		new User("jeff", {
+			"chipotle": -1,
+			"panda express": 1,
+		}),
 		new User("parsha"),
 	];
 
@@ -23,12 +40,18 @@ function dataCtrl($scope) {
 	];
 
 	$scope.addUser = function() {
-		$scope.users.push(new User($scope.formUserName));
+		var name = $scope.formUserName;
+		if (! isNameTaken(name, $scope.users)) {
+			$scope.users.push(new User(name));
+		}
 		$scope.formUserName = "";
 	};
 
 	$scope.addChoice = function() {
-		$scope.choices.push(new Choice($scope.formChoiceName));
+		var name = $scope.formChoiceName;
+		if (! isNameTaken(name, $scope.users)) {
+			$scope.choices.push(new Choice(name));
+		}
 		$scope.formChoiceName= "";
 	};
 }
