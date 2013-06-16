@@ -1,4 +1,8 @@
+angular.module('decider', ['ui.bootstrap']);
+
 function dataCtrl($scope) {
+	$scope.global = {voter: "jeff"};
+
 	function User(name, votes) {
 		this.name = name;
 		this.votes = votes || {};
