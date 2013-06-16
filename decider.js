@@ -15,6 +15,7 @@ function dataCtrl($scope) {
 			votes: [],
 			done: false,
 		});
+		$scope.formUserName = "";
 	};
 
 	$scope.addChoice = function() {
@@ -22,6 +23,7 @@ function dataCtrl($scope) {
 			name:$scope.formChoiceName,
 			score: 0,
 		});
+		$scope.formChoiceName= "";
 	};
 
 }
