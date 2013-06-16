@@ -10,7 +10,7 @@
 <div ng-controller="dataCtrl">
 	<ul>
 		<li ng-repeat="user in users">
-			<div class="done-{{user.done}}">{{user.name}}</div>
+			<div class="done-{{user.done()}}">{{user.name}}</div>
 		</li>
 	</ul>
 	<form >
