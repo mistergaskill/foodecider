@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app>
+<head>
+	<script src="angular.js"></script>
+	<script type="text/javascript" src="decider.js"></script>
+	<link rel="stylesheet" href="decider.css">
+</head>
+
+<body>
+<div ng-controller="dataCtrl">
+	<ul>
+		<li ng-repeat="user in users">
+			<div class="done-{{user.done}}">{{user.name}}</div>
+		</li>
+	</ul>
+	<form >
+		<input type="text" ng-model="formUserName" ng-model-instant>
+		<button ng-click="addUser()">Add User</button>
+	</form>
+	<ul>
+		<li ng-repeat="choice in choices">
+			<div> {{choice.name}}</div>
+		</li>
+	</ul>
+	<form >
+		<input type="text" ng-model="formChoiceName" ng-model-instant>
+		<button ng-click="addChoice()">Add Option</button>
+	</form>
+</div>
+</body>
+</html>
