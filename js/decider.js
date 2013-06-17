@@ -53,7 +53,7 @@ function dataCtrl($scope) {
 
 	$scope.addChoice = function() {
 		var name = $scope.formChoiceName;
-		if (! isNameTaken(name, $scope.users)) {
+		if (! isNameTaken(name, $scope.choices)) {
 			$scope.choices.push(new Choice(name));
 		}
 		$scope.formChoiceName= "";
