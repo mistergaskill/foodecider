@@ -2,6 +2,7 @@ angular.module('decider', ['ui.bootstrap']);
 
 function dataCtrl($scope) {
 	$scope.global = {voter: "jeff"};
+	$scope.scores= [-2, -1, 0, 1, 2];
 
 	function User(name, votes) {
 		this.name = name;

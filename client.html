@@ -22,11 +22,7 @@
 	{{global.voter}}'s choices.
 	<div ng-repeat="choice in choices">
 		<div class="btn-group" data-toggle="buttons-radio">
-			<button class="btn">-2</button>
-			<button class="btn">-1</button>
-			<button class="btn">0</button>
-			<button class="btn">1</button>
-			<button class="btn">2</button>
+			<button ng-repeat="score in scores" class="btn">{{score}}</button>
 		</div>
 		{{choice.name}}: {{choice.getScore()}}
 	</div>
