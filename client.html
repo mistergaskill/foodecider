@@ -1,5 +1,6 @@
 <!doctype html>
 <html ng-app="decider">
+
 <head>
 	<script src="js/angular.js"></script>
 	<script src="js/ui-bootstrap-tpls-0.3.0.js"></script>
@@ -9,27 +10,37 @@
 </head>
 
 <body>
-<div ng-controller="dataCtrl">
-	<div class="btn-group">
-		<button ng-repeat="user in users" type="button" class="btn" ng-model="global.voter" btn-radio="user.name">
-		<div class="done-{{user.isDone()}}">{{user.name}}</div>
-		</button>
-	</div>
-	<form >
-		<input type="text" ng-model="formUserName" ng-model-instant>
-		<button ng-click="addUser()">Add User</button>
-	</form>
-	{{global.voter}}'s choices.
-	<div ng-repeat="choice in choices">
-		<div class="btn-group" data-toggle="buttons-radio">
-			<button ng-repeat="score in scores" class="btn">{{score}}</button>
+	<div ng-controller="dataCtrl">
+		<div class="btn-group">
+			<button ng-repeat="user in users"
+				type="button"
+				class="btn"
+				ng-model="global.voter"
+				btn-radio="user.name">
+				<span class="done-{{user.isDone()}}">{{user.name}}</span>
+			</button>
 		</div>
-		{{choice.name}}: {{choice.getScore()}}
+
+		<form>
+			<input type="text" ng-model="formUserName" ng-model-instant>
+			<button ng-click="addUser()">Add User</button>
+		</form>
+
+		{{global.voter}}'s choices.
+		<div ng-repeat="choice in choices">
+			<div class="btn-group" data-toggle="buttons-radio">
+				<button ng-repeat="score in scores"
+					class="btn">
+					{{score}}
+				</button>
+			</div>
+			{{choice.name}}: {{choice.getScore()}}
+		</div>
+
+		<form>
+			<input type="text" ng-model="formChoiceName" ng-model-instant>
+			<button ng-click="addChoice()">Add Option</button>
+		</form>
 	</div>
-	<form >
-		<input type="text" ng-model="formChoiceName" ng-model-instant>
-		<button ng-click="addChoice()">Add Option</button>
-	</form>
-</div>
-</body>
+	</body>
 </html>

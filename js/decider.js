@@ -46,7 +46,7 @@ function dataCtrl($scope) {
 
 	$scope.addUser = function() {
 		var name = $scope.formUserName;
-		if (! isNameTaken(name, $scope.users)) {
+		if ( ! isNameTaken(name, $scope.users)) {
 			$scope.users.push(new User(name));
 		}
 		$scope.formUserName = "";
