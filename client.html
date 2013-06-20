@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="decider">
+
+<head>
+	<script src="js/angular.js"></script>
+	<script src="js/ui-bootstrap-tpls-0.3.0.js"></script>
+	<script src="js/decider.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/decider.css">
+</head>
+
+<body>
+	<div ng-controller="dataCtrl">
+		<div class="btn-group">
+			<button ng-repeat="user in users"
+				type="button"
+				class="btn"
+				ng-model="global.voter"
+				btn-radio="user.name">
+				<span class="done-{{user.isDone()}}">{{user.name}}</span>
+			</button>
+		</div>
+
+		<form>
+			<input type="text" ng-model="formUserName" ng-model-instant>
+			<button ng-click="addUser()">Add User</button>
+		</form>
+
+		<div ng-repeat="choice in choices">
+			<div class="btn-group">
+				<button ng-repeat="score in scores"
+					type="button"
+					class="btn"
+					ng-model="getVoter().votes[choice.name]"
+					btn-radio="score">
+					{{score}}
+				</button>
+			</div>
+			{{choice.name}}: {{choice.getScore()}}
+		</div>
+
+		<form>
+			<input type="text" ng-model="formChoiceName" ng-model-instant>
+			<button ng-click="addChoice()">Add Option</button>
+		</form>
+		<h2 ng-hide="!finished()">{{winner().name}} is the winner!</h2>
+	</div>
+	</body>
+</html>
