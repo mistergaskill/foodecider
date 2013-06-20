@@ -1,7 +1,8 @@
+"use strict";
 angular.module('decider', ['ui.bootstrap']);
 
 function dataCtrl($scope) {
-	$scope.global = {voter: "jeff"};
+	$scope.global = { voter: "jeff" };
 	$scope.scores= [-2, -1, 0, 1, 2];
 
 	function User(name, votes) {
@@ -14,7 +15,6 @@ function dataCtrl($scope) {
 
 	function Choice(name) {
 		this.name = name;
-		this.getScores = function () {return 11;};
 		this.getScore = function () {
 			var _this = this;
 			return $scope.users.map(function (user) {
@@ -58,5 +58,36 @@ function dataCtrl($scope) {
 			$scope.choices.push(new Choice(name));
 		}
 		$scope.formChoiceName= "";
+	};
+
+	$scope.getVoter = function() {
+		return $scope.getUserWithName($scope.global.voter);
+	};
+
+	$scope.getUserWithName = function(name) {
+		var matches = $scope.users.filter(function(user) {
+			return user.name === name;
+		});
+		if (matches.length === 1) {
+			return matches[0];
+		}
+		else return null;
+	};
+
+	$scope.winner = function() {
+		return $scope.choices.reduce(function(best, choice) {
+			if (choice.getScore() > best.getScore()) {
+				return choice;
+			}
+			else {
+				return best;
+			}
+		});
+	};
+
+	$scope.finished = function() {
+		return $scope.users.reduce(function(othersDone, user){
+			return othersDone && user.isDone();
+		}, true);
 	};
 }
